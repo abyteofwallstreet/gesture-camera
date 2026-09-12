@@ -16,11 +16,11 @@ The current interface, shown with sample frames from a recorded demo. Camera inp
 
 **Photo browser** — select a thumbnail to view and edit a saved page.
 
-![Photo thumbnails and selected note](docs/images/photos.jpg)
+![Photo thumbnails and selected note](docs/images/photo-browser-342f112d.jpg)
 
 **Crop and correction** — adjust four corners, rotation and lens distortion before replacing the processed photo.
 
-![Four-corner photo correction editor](docs/images/correction.jpg)
+![Four-corner photo correction editor](docs/images/photo-correction-d379f3b9.jpg)
 
 ## Download
 
