@@ -1,0 +1,34 @@
+.venv/
+.runtime/
+.state/
+notes/
+models/*.task
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.pyc
+.DS_Store
+.env
+dist/
+qt_plugins/
+node_modules/
+src-tauri/target/
+src-tauri/gen/
+desktop/assets/
+tmp/
+
+# Local exports and private environment overrides
+output/
+.env.*
+!.env.example
+
+# Previous Python/Qt prototype (kept locally; not part of the Tauri release)
+/src/
+/tests/
+/.python-version
+/pyproject.toml
+/uv.lock
+/LEGACY_README.md
+/DESIGN.md
+/CLEANUP.md
+/scripts/*.py

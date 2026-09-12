@@ -1,0 +1,16 @@
+{
+  "name": "note-capturer-desktop",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "assets": "node scripts/desktop-assets.mjs",
+    "dev": "npm run assets && tauri dev",
+    "build": "npm run assets && node scripts/build-desktop.mjs",
+    "test": "node --test desktop-tests/*.test.mjs"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.11.0",
+    "@mediapipe/tasks-vision": "0.10.32"
+  }
+}

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gesture Camera</title><link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">◉</span><div><h1>Gesture Camera</h1><p>A simple gesture. A saved page.</p></div></div>
+    <div class="top-actions"><button id="showPhotos" class="quiet">Photos</button><button id="showSettings" class="quiet">Settings</button></div>
+  </header>
+  <main>
+    <div class="capture-layout">
+    <section class="workspace">
+      <div class="viewport" id="viewport">
+        <div id="imageLayer"><video id="video" autoplay playsinline muted></video><canvas id="correctedCanvas" hidden></canvas><svg id="overlay" viewBox="0 0 1 1" preserveAspectRatio="none"></svg></div>
+        <div class="empty" id="empty"><div class="camera-symbol">◎</div><h2>Place your notes under the camera</h2><p>Gestures work anywhere in the frame. Photos retain the full capture resolution.</p><button id="startEmpty" class="primary">Start camera</button></div>
+        <div class="view-badge" id="viewBadge" hidden>Original view</div>
+        <div class="calibration" id="calibration" hidden><span id="calibrationText">Select the page corners: top left → top right → bottom right → bottom left</span><button id="cancelCalibration">Cancel</button></div>
+        <div id="flash" aria-hidden="true"></div>
+      </div>
+      <div class="telemetry"><span id="resolution">Camera is off</span><span id="fps">— FPS</span></div>
+      <div class="capture-bar"><div class="status-block"><span class="status-dot" id="statusDot"></span><div><strong id="phase">Ready</strong><p id="phaseDetail">Start the camera, then hold up your index finger.</p></div></div><button id="capture" class="shutter" disabled><span>●</span> Capture <kbd>Space</kbd></button><button id="soundToggle" class="quiet sound-toggle" aria-label="Capture sound" aria-pressed="true" title="Mute capture sound"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4 6 8H3v8h3l5 4Z"/><path class="sound-waves" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/><path class="sound-muted" d="m16 9 5 6m0-6-5 6"/></svg><span id="soundLabel">Sound on</span></button><button id="stop" class="quiet" disabled>Stop</button></div>
+      <div class="progress-track"><div id="progress"></div></div>
+      <div class="notice" id="notice" role="status" hidden></div>
+    </section>
+    </div>
+    <section id="photoSection" class="photo-section" aria-labelledby="photosTitle">
+      <div class="gallery-heading"><h2 id="photosTitle">Photos <span id="photoCount">0</span></h2><button id="folder" class="quiet">Open photo folder ↗</button></div>
+      <div class="photo-browser">
+        <div class="thumbnail-column"><p class="helper">Click to view</p><div id="photos" role="listbox" aria-label="Photo list"></div></div>
+        <div class="photo-detail"><div class="photo-detail-toolbar"><span id="selectedPhotoInfo">No photo selected</span><div><button id="movePhotoUp" disabled title="Move earlier in the list">↑ Earlier</button><button id="movePhotoDown" disabled title="Move later in the list">↓ Later</button><button id="editPhoto" disabled>Crop & correct</button><button id="deletePhoto" disabled>Delete</button></div></div><div class="photo-display"><img id="selectedPhoto" alt="Selected note photo" hidden><p id="photoPlaceholder">Your latest photo will appear here automatically.</p></div><p id="galleryMessage" role="status"></p></div>
+      </div>
+    </section>
+  </main>
+  <dialog id="settingsDialog" class="settings-dialog" aria-labelledby="settingsTitle">
+    <div id="settingsBackdrop" class="settings-backdrop" aria-hidden="true"></div>
+    <div id="settingsPanel" class="settings-panel">
+    <div class="dialog-heading"><h2 id="settingsTitle">Settings</h2><button id="closeSettings" aria-label="Close settings">Done</button></div>
+    <div class="sidebar">
+      <section class="panel"><div class="eyebrow">CAMERA</div><h2>Camera</h2>
+        <fieldset id="camera" class="camera-picker" aria-describedby="cameraHelp"><legend>Camera</legend><div id="cameraChoices"></div></fieldset>
+        <button id="refreshCameras" class="text-button">Refresh cameras</button>
+        <button id="cameraControls" class="wide" disabled>Lens &amp; framing…</button>
+        <p class="helper">Opens macOS camera controls. On supported iPhones, choose Main or Ultra Wide. With Center Stage off, use 0.5× / 1× in the system preview. Available controls depend on your device.</p>
+        <p id="cameraHelp" class="helper" role="status">Start the camera once to allow access and show device names.</p>
+        <details id="iphoneHelp"><summary>Use an iPhone camera</summary><p class="helper">Turn on Continuity Camera in iPhone Settings → General → AirPlay &amp; Continuity. Sign in to the same Apple Account on both devices, with Wi-Fi and Bluetooth on. Keep your iPhone nearby, locked and steady, with its rear camera facing your notes.</p><p class="helper">Choose your iPhone in the Camera list above. If it does not appear, connect it to this Mac with a USB cable, trust the Mac, lock the iPhone and select Refresh cameras. Requires iPhone XR or later with iOS 16+, and macOS 13+.</p></details>
+        <p class="helper">Automatically requests the best available resolution. The actual capture size appears below the preview.</p>
+        <button id="restart" class="wide">Start camera</button>
+      </section>
+      <section class="panel"><div class="eyebrow">GESTURE</div><h2>Gesture capture <label class="switch"><input id="auto" type="checkbox" checked><span></span></label></h2>
+        <div class="gesture-card"><div class="gesture-symbol">☝</div><div><strong id="gestureName">Hold up your index finger</strong><p id="gestureReadout">Gesture detection is off</p></div></div>
+        <label>Detection threshold <output id="thresholdValue">0.65</output><input id="threshold" type="range" min="0.2" max="0.95" step="0.05" value="0.65"></label>
+        <label>Hold duration <output id="holdValue">0.6 s</output><input id="hold" type="range" min="0.2" max="2" step="0.1" value="0.6"></label>
+        <label class="check-row"><input id="waitHand" type="checkbox" checked><span>Wait until hands leave the frame</span></label>
+        <details><summary>Learn a custom gesture</summary><p class="helper">Hold your gesture for about 2 seconds to record it locally. Recording does not take a photo. You can hold a pen, but choose a pose that differs from your normal writing position.</p><button id="learn" class="wide" disabled>Record gesture</button><button id="resetLearn" class="text-button">Reset to index finger</button></details>
+      </section>
+      <section class="panel"><div class="eyebrow">CORRECTION</div><h2>Page correction</h2>
+        <label>Rotation <output id="rotationLabel">0°</output><input id="rotationRange" type="range" min="-180" max="180" step="0.1" value="0"></label>
+        <div class="view-tools"><input id="rotationAngle" class="angle-input" type="number" step="0.1" value="0" aria-label="Rotation angle in degrees"><span>°</span><button id="rotate" title="Rotate 90° clockwise">+90°</button><button id="calibrate">Perspective</button></div>
+        <p class="helper">Drag or enter an angle. Each camera remembers its rotation. Adjust rotation before selecting page corners.</p>
+        <p class="helper">Select the four page corners to correct perspective. The camera view shows the framing and correction used for your photo. Original backups are optional below.</p>
+        <label>Lens distortion <output id="distortionValue">0.00</output><input id="distortion" type="range" min="-0.35" max="0.35" step="0.01" value="0"></label>
+        <button id="resetCorrection" class="text-button">Clear correction</button>
+      </section>
+      <section class="panel save-panel"><div class="eyebrow">SAVE</div><h2>Save</h2><p id="folderPath" class="folder-path">Loading…</p><button id="chooseFolder" class="text-button">Change folder</button><span class="format">PNG · Lossless</span><label class="check-row"><input id="saveOriginal" type="checkbox"><span>Also save an original backup (entire camera frame)</span></label><p class="helper">Save only the corrected photo by default. Without correction, save the full original frame.</p></section>
+    </div>
+    </div>
+  </dialog>
+  <dialog id="photoEditor" class="photo-editor" aria-labelledby="editorTitle">
+    <div class="dialog-heading"><div><h2 id="editorTitle">Edit photo</h2><p id="editSource" class="helper"></p></div><button id="cancelEdit">Cancel</button></div>
+    <div class="edit-tools"><button id="editCrop">Crop</button><button id="editQuad">Perspective</button><button id="editRotate">+90°</button><label>Rotation <input id="editRotationRange" type="range" min="-180" max="180" step="0.1" value="0"><input id="editRotationAngle" class="angle-input" type="number" step="0.1" value="0" aria-label="Photo rotation angle in degrees">°</label><button id="editReset">Reset</button><label><input id="editPreview" type="checkbox"> Preview result</label><label class="edit-distortion">Lens distortion <input id="editDistortion" type="range" min="-0.35" max="0.35" step="0.01" value="0"><output id="editDistortionValue">0.00</output></label></div>
+    <p id="editHint" class="helper">Drag the corners to adjust the area, or select four new corners.</p>
+    <div id="editStage"><div id="editImageFrame"><canvas id="editCanvas"></canvas><svg id="editOverlay" viewBox="0 0 1 1" preserveAspectRatio="none"></svg></div></div>
+    <div class="edit-footer"><span id="editMessage" role="status"></span><button id="saveEdit" class="primary">Save & replace photo</button></div>
+  </dialog>
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>

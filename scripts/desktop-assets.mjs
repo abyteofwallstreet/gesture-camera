@@ -1,0 +1,12 @@
+import { mkdir, copyFile, cp, access } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+const root = fileURLToPath(new URL('../', import.meta.url));
+const output = path.join(root, 'desktop/assets');
+await mkdir(output, { recursive: true });
+await cp(path.join(root, 'node_modules/@mediapipe/tasks-vision/wasm'), path.join(output, 'wasm'), { recursive: true });
+await copyFile(path.join(root, 'node_modules/@mediapipe/tasks-vision/vision_bundle.cjs'), path.join(output, 'vision_bundle.js'));
+const model = path.join(root, 'models/gesture_recognizer.task');
+await access(model).catch(() => { throw new Error('缺少 models/gesture_recognizer.task；请按 README 下载手势模型。'); });
+await copyFile(model, path.join(output, 'gesture_recognizer.task'));
+console.log('本地手势资源准备完成；应用运行时无需联网。');

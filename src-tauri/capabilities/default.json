@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "main",
+  "description": "Local camera window; files are written only by scoped Rust commands.",
+  "windows": ["main"],
+  "permissions": ["core:default"]
+}

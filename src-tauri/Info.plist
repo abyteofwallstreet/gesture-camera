@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>CFBundleDevelopmentRegion</key><string>en</string>
+  <key>CFBundleLocalizations</key><array><string>en</string></array>
+  <!-- WebKit discovers Continuity Camera through the compatible wide-angle
+       device type. Do not opt into native-only device types here. -->
+  <key>NSCameraUsageDescription</key>
+  <string>Use the camera to recognize gestures and save photos of your notes. Images are processed only on this Mac.</string>
+  <key>NSHighResolutionCapable</key><true/>
+</dict></plist>
