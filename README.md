@@ -2,7 +2,7 @@
 
 I've tried taking notes (mostly math notes) using an iPad, a Supernote Manta, a reMarkable, and Neovim, but there's just something about writing on paper with a silky-smooth pen. Hence this app.
 
-Just connect a webcam or use your iPhone as a remote camera, position it properly, and capture photos with the space bar or a hand gesture (or a foot gesture, if you so wish). Then give the folder location to the LLM of your choice and let it tidy up your notes and turn them into LaTeX or a PDF. It works perfectly for me.
+Just connect a webcam or use your iPhone as a remote camera, position it properly, and capture photos with the space bar or a hand gesture (or a foot gesture, if you so wish). I use a $5 phone holder and a 720p webcam, and the setup works fine—you'd be amazed at how good frontier LLMs are at OCR. Then give the folder location to the LLM of your choice and let it tidy up your notes and turn them into LaTeX or a PDF. It works perfectly for me.
 
 And of course, you might want to integrate an LLM of your choice for OCR, such as a Qwen model. It should be fairly easy—just a few prompts away.
 
