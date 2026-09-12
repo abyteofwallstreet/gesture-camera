@@ -4,6 +4,8 @@ A local macOS camera app with gesture-triggered capture and perspective correcti
 
 **0.2.0 Beta · macOS 13+ · Apple Silicon (M-series)**
 
+[**Download for macOS — Apple Silicon (.dmg, 14.9 MB)**](https://github.com/abyteofwallstreet/gesture-camera/releases/download/v0.2.0-beta.1/Gesture-Camera-0.2.0-arm64.dmg) · [Release notes and checksums](https://github.com/abyteofwallstreet/gesture-camera/releases/tag/v0.2.0-beta.1)
+
 ## Screenshots
 
 The current interface, shown with sample frames from a recorded demo. Camera input and the photo library are simulated for these screenshots; the displayed dimensions and frame rate are not a hardware benchmark.
@@ -22,7 +24,7 @@ The current interface, shown with sample frames from a recorded demo. Camera inp
 
 ## Download
 
-Download the DMG from [Releases](https://github.com/abyteofwallstreet/gesture-camera/releases), open it, and drag Gesture Camera into Applications.
+Download the DMG using the link above, open it, and drag Gesture Camera into Applications. You can also find the installer under **Assets** on the [Beta release page](https://github.com/abyteofwallstreet/gesture-camera/releases/tag/v0.2.0-beta.1).
 
 This beta is ad-hoc signed and has not been notarized by Apple. macOS may block the first launch. After verifying the download source, allow it in System Settings → Privacy & Security if needed. An Intel build is not currently provided.
 
