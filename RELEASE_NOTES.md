@@ -7,8 +7,24 @@ A local macOS camera app that takes photos when you make a hand gesture.
 - Download `Gesture-Camera-0.2.0-arm64.dmg` from this release.
 - Requires macOS 13 or later on Apple Silicon (M-series). This download does not support Intel Macs.
 - Open the DMG and drag Gesture Camera into Applications.
-- This beta uses an ad-hoc signature and is not notarized by Apple. macOS may block the first launch. After verifying the download source, allow the app in System Settings → Privacy & Security if needed.
+- macOS may block the first launch of this unnotarized beta; follow the steps below.
 - Open the app and click **Start camera**. Launching the app or refreshing its device list does not open a camera.
+
+### First launch: “Apple could not verify”
+
+Gesture Camera's current beta uses an ad-hoc signature, not an Apple Developer ID certificate, and has not been notarized by Apple. macOS may therefore show **“Gesture Camera.app” Not Opened** and say it cannot verify that the app is free of malware. This message does not mean malware was detected; it also does not certify the app as safe.
+
+If you trust this project and downloaded the DMG from [this repository's release page](https://github.com/abyteofwallstreet/gesture-camera/releases/tag/v0.2.0-beta.1):
+
+1. Copy **Gesture Camera.app** into **Applications** and try opening it.
+2. In the warning, click **Done** to dismiss it.
+3. Open **System Settings → Privacy & Security** and scroll to the **Security** section.
+4. Find the message about Gesture Camera being blocked and click **Open Anyway**.
+5. Confirm **Open**, and authenticate if macOS asks. Then click **Start camera** in the app and allow camera access.
+
+If **Open Anyway** is missing, try opening the app once more, then check Privacy & Security again. A managed Mac may require your administrator's approval.
+
+This creates an exception for this app; you do not need to disable Gatekeeper globally or run Terminal commands. See [Apple's official instructions](https://support.apple.com/en-us/102445).
 
 ## Features
 
