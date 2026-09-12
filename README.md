@@ -4,6 +4,8 @@ I've tried taking notes (mostly math notes) using an iPad, a Supernote Manta, a 
 
 Just connect a webcam or use your iPhone as a remote camera, position it properly, and capture photos with the space bar or a hand gesture (or a foot gesture, if you so wish). Then give the folder location to the LLM of your choice and let it tidy up your notes and turn them into LaTeX or a PDF. It works perfectly for me.
 
+And of course, you might want to integrate an LLM of your choice for OCR, such as a Qwen model. It should be fairly easy—just a few prompts away.
+
 A local macOS camera app with gesture-triggered capture and perspective correction. Built with Tauri, WebKit and MediaPipe.
 
 **0.2.0 Beta · macOS 13+ · Apple Silicon (M-series)**
